@@ -1,6 +1,7 @@
 """Delete time series data from InfluxDB."""
 
-import datetime
+from datetime import datetime
+from typing import Union
 
 from influxdb_client import DeleteService, DeletePredicateRequest
 
@@ -13,7 +14,8 @@ class DeleteApi(object):
         self._influxdb_client = influxdb_client
         self._service = DeleteService(influxdb_client.api_client)
 
-    def delete(self, start: datetime, stop: object, predicate: object, bucket: str, org: str) -> None:
+    def delete(self, start: Union[datetime, str], stop: Union[datetime, str],
+               predicate: str, bucket: str, org: str) -> None:
         """
         Delete Time series data from InfluxDB.
 
